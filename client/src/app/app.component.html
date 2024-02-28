@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+
+<h2>Users:</h2>
+<ul>
+@for (user of users; track $index ) {
+    <li>{{user.id}} - {{user.userName}}</li>
+}
+</ul>
