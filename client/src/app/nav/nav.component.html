@@ -15,6 +15,9 @@
                 </li>
             </ng-container>
             }
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
+            </li>
         </ul>
         @if (!(accountService.currentUser$ | async)) {
         <form #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">

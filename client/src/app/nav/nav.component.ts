@@ -22,7 +22,6 @@ export class NavComponent {
   login() {
     this.accountService.login(this.model).subscribe({
       next: _ => this.router.navigateByUrl('/members'),
-      error: error => this.toastr.error("Invalid username or password. Please try again.")
     })
   }
 
