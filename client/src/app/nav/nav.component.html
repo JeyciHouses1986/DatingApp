@@ -19,25 +19,25 @@
                 <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
             </li>
         </ul>
-        @if (accountService.currentUser$ | async) {
+        <div *ngIf="userData$ | async as userData; else loginForm">
             <div class="dropdown" dropdown>
-                <img src="{{userData?.photoUrl || './assets/user.png'}}" alt="User photo">
+                <img src="{{ userData.photoUrl || './assets/user.png' }}" alt="User photo">
                 <button class="btn btn-secondary dropdown-toggle" type="button" dropdownToggle>
-                    Welcome {{userData?.username | titlecase}}
+                    Welcome {{ userData.username | titlecase }}
                 </button>
                 <ul class="dropdown-menu" *dropdownMenu>
-                    <li><a class="dropdown-item" routerLink='/member/edit'>Edit Profile</a></li>
+                    <li><a class="dropdown-item" routerLink="/member/edit">Edit Profile</a></li>
                     <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
                 </ul>
             </div>
-        } @else {
+        </div>
+        <ng-template #loginForm>
             <form #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
-                <input name="userName" [(ngModel)]="model.username" class="form-control me-2" type="text"
-                    placeholder="Username">
-                <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password"
-                    placeholder="Password">
+                <input name="userName" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="Username">
+                <input name="password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password">
                 <button class="btn btn-outline-secondary" type="submit">Login</button>
             </form>
-        }
+        </ng-template>
+        
     </div>
 </nav>

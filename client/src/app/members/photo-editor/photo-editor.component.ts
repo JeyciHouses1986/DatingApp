@@ -14,13 +14,13 @@ import { Photo } from '../../_modules/photo';
   styleUrl: './photo-editor.component.css'
 })
 export class PhotoEditorComponent implements OnInit {
-  @Input() member : Member | undefined;
+  @Input() member: Member | undefined;
   uploader: FileUploader | undefined;
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
-  user : User | undefined;
+  user: User | undefined;
 
-  constructor(private accountService : AccountService, private memberService : MembersService) {
+  constructor(private accountService: AccountService, private memberService: MembersService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => {
         if (user) this.user = user
@@ -39,7 +39,7 @@ export class PhotoEditorComponent implements OnInit {
   setMainPhoto(photo: Photo) {
     this.memberService.setMainPhoto(photo.id).subscribe({
       next: () => {
-        if (this.user && this.member){
+        if (this.user && this.member) {
           this.user.photoUrl = photo.url;
           this.accountService.setCurrentUser(this.user);
           this.member.photoUrl = photo.url;
@@ -56,7 +56,7 @@ export class PhotoEditorComponent implements OnInit {
     this.memberService.deletePhoto(photoId).subscribe({
       next: () => {
         if (this.member) {
-          this.member.photos = this.member.photos.filter(p => p.id!= photoId);
+          this.member.photos = this.member.photos.filter(p => p.id !== photoId);
         }
       }
     })
@@ -81,6 +81,11 @@ export class PhotoEditorComponent implements OnInit {
       if (response) {
         const photo = JSON.parse(response);
         this.member?.photos.push(photo);
+        if (photo.isMain && this.user && this.member) {
+          this.user.photoUrl = photo.url;
+          this.member.photoUrl = photo.url;
+          this.accountService.setCurrentUser(this.user);
+        }
       }
     }
   }

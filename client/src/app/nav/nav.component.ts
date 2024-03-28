@@ -1,33 +1,35 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 import { User } from '../_modules/user';
-import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css'
+  styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
   model: any = {};
-  userData: User | null = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '{}') : null;
+  userData$: Observable<User | null>;
 
-  constructor(public accountService: AccountService, private router: Router, private toastr: ToastrService) { }
-
-  ngOnInit() {
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
+    this.userData$ = this.accountService.currentUser$;
   }
 
   login() {
     this.accountService.login(this.model).subscribe({
       next: _ => this.router.navigateByUrl('/members'),
-    })
+    });
   }
 
   logout() {
     this.accountService.logout();
     this.router.navigateByUrl('/');
   }
-
 }
