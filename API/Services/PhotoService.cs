@@ -1,9 +1,10 @@
-﻿using API.Interfaces;
+﻿using API.Controllers;
+using API.Interfaces;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
 
-namespace API;
+namespace API.Services;
 
 public class PhotoService : IPhotoService
 {

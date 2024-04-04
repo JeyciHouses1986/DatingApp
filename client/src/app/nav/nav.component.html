@@ -23,7 +23,7 @@
             <div class="dropdown" dropdown>
                 <img src="{{ userData.photoUrl || './assets/user.png' }}" alt="User photo">
                 <button class="btn btn-secondary dropdown-toggle" type="button" dropdownToggle>
-                    Welcome {{ userData.username | titlecase }}
+                    Welcome {{ userData.knownAs }}
                 </button>
                 <ul class="dropdown-menu" *dropdownMenu>
                     <li><a class="dropdown-item" routerLink="/member/edit">Edit Profile</a></li>

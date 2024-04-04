@@ -4,13 +4,15 @@ import { MembersService } from '../../_services/members.service';
 import { ActivatedRoute } from '@angular/router';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { Gallery, GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
+import { CommonModule } from '@angular/common';
+import { TimeagoModule } from 'ngx-timeago';
 
 @Component({
   selector: 'app-member-detail',
   standalone: true,
   templateUrl: './member-detail.component.html',
   styleUrl: './member-detail.component.css',
-  imports: [TabsModule, GalleryModule]
+  imports: [TabsModule, GalleryModule, CommonModule, TimeagoModule]
 })
 export class MemberDetailComponent implements OnInit {
   member: Member | undefined;
