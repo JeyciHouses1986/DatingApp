@@ -1,6 +1,7 @@
 ﻿using API.Controllers;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Interfaces;
 

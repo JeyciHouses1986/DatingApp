@@ -2,7 +2,7 @@
 using API.Interfaces;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace API.Controllers;
+namespace API.Helpers;
 
 public class LogUserActivity : IAsyncActionFilter
 {

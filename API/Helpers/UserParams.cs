@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualBasic;
 
-namespace API.Controllers;
+namespace API.Helpers;
 
 public class UserParams : PaginationParams
 {
