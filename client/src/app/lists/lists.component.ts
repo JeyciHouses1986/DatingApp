@@ -6,7 +6,7 @@ import { Pagination } from '../_modules/pagination';
 @Component({
   selector: 'app-lists',
   templateUrl: './lists.component.html',
-  styleUrl: './lists.component.css'
+  styleUrls: ['./lists.component.css']
 })
 export class ListsComponent implements OnInit {
   members: Member[] | undefined;

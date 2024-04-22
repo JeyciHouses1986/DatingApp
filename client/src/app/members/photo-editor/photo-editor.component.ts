@@ -11,7 +11,7 @@ import { Photo } from '../../_modules/photo';
 @Component({
   selector: 'app-photo-editor',
   templateUrl: './photo-editor.component.html',
-  styleUrl: './photo-editor.component.css'
+  styleUrls: ['./photo-editor.component.css']
 })
 export class PhotoEditorComponent implements OnInit {
   @Input() member: Member | undefined;

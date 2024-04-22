@@ -1,9 +1,6 @@
-@if (member)
-{
-<div class="row mb-3 mt-3">
-    @for (photo of member.photos; track member.id)
-    {
-    <div class="col-2 mb-2">
+
+<div *ngIf="member" class="row mb-3 mt-3">
+    <div *ngFor="let photo of member.photos" class="col-2 mb-2">
         <img src="{{photo.url}}" alt="photo of user" class="img-thumbnail mb-1">
         <div class="text-center d-flex">
             <button 
@@ -19,9 +16,7 @@
                 ><i class="fa fa-trash"></i></button>
         </div>
     </div>
-    }
 </div>
-}
 
 <div class="row">
 
@@ -42,8 +37,7 @@
         <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
 
-    @if (uploader?.queue?.length) {
-    <div class="col-9" style="margin-bottom: 40px">
+    <div *ngIf="uploader?.queue?.length" class="col-9" style="margin-bottom: 40px">
 
         <h3>Upload queue</h3>
         <p>Queue length: {{ uploader?.queue?.length }}</p>
@@ -84,5 +78,4 @@
             </button>
         </div>
     </div>
-    }
 </div>

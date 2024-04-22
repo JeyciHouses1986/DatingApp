@@ -10,7 +10,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   selector: 'app-member-messages',
   standalone: true,
   templateUrl: './member-messages.component.html',
-  styleUrl: './member-messages.component.css',
+  styleUrls: ['./member-messages.component.css'],
   imports: [CommonModule, TimeagoModule, FormsModule]
 })
 export class MemberMessagesComponent implements OnInit {

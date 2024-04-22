@@ -18,7 +18,7 @@ import { take } from 'rxjs';
   selector: 'app-member-detail',
   standalone: true,
   templateUrl: './member-detail.component.html',
-  styleUrl: './member-detail.component.css',
+  styleUrls: ['./member-detail.component.css'],
   imports: [TabsModule, GalleryModule, CommonModule, TimeagoModule, MemberMessagesComponent]
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {

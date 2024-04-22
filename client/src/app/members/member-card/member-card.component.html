@@ -1,5 +1,4 @@
-@if (member) {
-<div class="card mb-4">
+<div *ngIf="member" class="card mb-4">
     <div class="card-img-wrapper">
         <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top">
         <ul class="list-inline member-icons animate text-center">
@@ -26,4 +25,3 @@
         <p class="card-text text-muted text-center"><i class="fa fa-map-marker"></i> {{member.city}}</p>
     </div>
 </div>
-}

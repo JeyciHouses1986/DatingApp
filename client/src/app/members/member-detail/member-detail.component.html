@@ -46,11 +46,9 @@
                 <p>{{member.interests}}</p>
             </tab>
             <tab heading="Photos" #photoTab="tab" (selectTab)="onTabActivated($event)" >
-                @if (photoTab.active) {
-                <div class="row">
+                <div *ngIf="photoTab.active" class="row">
                     <gallery [items]="images" class="gallery"></gallery>
                 </div>
-                }
             </tab>
             <tab heading="Messages" class="tab" (selectTab)="onTabActivated($event)" >
                 <app-member-messages [username]="member.userName"></app-member-messages>
