@@ -1,20 +1,13 @@
-
 <div *ngIf="member" class="row mb-3 mt-3">
     <div *ngFor="let photo of member.photos" class="col-2 mb-2">
-        <img src="{{photo.url}}" alt="photo of user" class="img-thumbnail mb-1">
+        <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1" [class.not-approved]="!photo.isApproved">
+            <span class="text-center" *ngIf="!photo.isApproved" class="text-danger">Awaiting approval</span>
         <div class="text-center d-flex">
-            <button 
-                class="btn btn-sm"
-                [disabled]="photo.isMain"
-                (click)="setMainPhoto(photo)"
-                [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success' "
-                >Main</button>
-            <button 
-                class="btn btn-danger" 
-                [disabled]="photo.isMain" 
-                (click)="deletePhoto(photo.id)" 
-                ><i class="fa fa-trash"></i></button>
-        </div>
+            <button class="btn btn-sm" [disabled]="photo.isMain || !photo.isApproved" (click)="setMainPhoto(photo)"
+            [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success' ">Main</button>
+            <button class="btn btn-danger" [disabled]="photo.isMain" (click)="deletePhoto(photo.id)"><i
+                class="fa fa-trash"></i></button>
+            </div>
     </div>
 </div>
 
@@ -61,7 +54,8 @@
             <div>
                 Queue progress:
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader?.progress + '%' }"></div>
+                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader?.progress + '%' }">
+                    </div>
                 </div>
             </div>
             <button type="button" class="btn btn-success btn-s m-1" (click)="uploader?.uploadAll()"
