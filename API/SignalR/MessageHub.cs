@@ -15,7 +15,7 @@ public class MessageHub : Hub
     private readonly IMapper _mapper;
     private readonly IHubContext<PresenceHub> _presenceHub;
 
-    public MessageHub(IUnitOfWork uow, IMapper mapper, IHubContext<PresenceHub> presenceHub )
+    public MessageHub(IUnitOfWork uow, IMapper mapper, IHubContext<PresenceHub> presenceHub)
     {
         _uow = uow;
         _mapper = mapper;
@@ -36,7 +36,7 @@ public class MessageHub : Hub
             .GetMessageThread(Context.User.GetUserName(), otherUser);
 
         if (_uow.HasChanges()) await _uow.Complete();
-        
+
         await Clients.Caller.SendAsync("ReceiveMessageThread", messages);
     }
 
@@ -81,14 +81,15 @@ public class MessageHub : Hub
             var connections = await PresenceTracker.GetConnectionsForUsers(recipient.UserName);
             if (connections != null)
             {
+                message.DateRead = null;
                 await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived",
-                new {username = sender.UserName, knownAs=sender.KnownAs});
+                new { username = sender.UserName, knownAs = sender.KnownAs });
             }
         }
 
         _uow.MessageRepository.AddMessage(message);
 
-        if (await _uow.Complete()) 
+        if (await _uow.Complete())
         {
             await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
         }
@@ -104,7 +105,7 @@ public class MessageHub : Hub
     {
         var group = await _uow.MessageRepository.GetMessageGroups(groupName);
         var connection = new Connection(Context.ConnectionId, Context.User.GetUserName());
-        
+
         if (group == null)
         {
             group = new Group(groupName);
